@@ -1,0 +1,73 @@
+td.details-control {
+  background: url('../images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('../images/details_close.png') no-repeat center center;
+}
+
+.controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 6px 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tree {
+  width: 100%;
+}
+
+.tree ul {
+  list-style: none;
+  display: none;
+  margin: 4px auto;
+  margin-left: 6px;
+  border-left: 1px dashed #dfdfdf;
+}
+
+
+.tree li {
+  padding: 4px 4px;
+  cursor: pointer;
+  vertical-align: middle;
+  background: #fff;
+}
+
+.tree li:before {
+  content: "\ea3d"; /* FontAwesome Unicode */
+  font-family: Icomoon;
+  display: inline-block;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
+}
+
+.tree li:first-child {
+  border-radius: 3px 3px 0 0;
+}
+
+.tree li:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.tree .active li {
+  background: #0000;
+}
+
+.tree label {
+  cursor: pointer;
+}
+
+.tree input[type=checkbox] {
+  margin: -2px 6px 0 0px;
+}
+
+.has > label {
+  color: #000;
+}
+
+.tree .total {
+  color: #e13300;
+}
