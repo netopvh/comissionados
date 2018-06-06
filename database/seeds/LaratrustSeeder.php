@@ -73,6 +73,7 @@ class LaratrustSeeder extends Seeder
     		['name' =>'atualizar-regime-trabalho','display_name'=>'Atualizar Regime trabalho','group_id' => 10],
     		['name' =>'remover-regime-trabalho','display_name'=>'Remover Regime trabalho','group_id' => 10],
     		['name' =>'criar-secretarias','display_name'=>'Criar Secretarias','group_id' => 11],
+    		['name' =>'atualizar-secretarias','display_name'=>'Atualizar Secretarias','group_id' => 11],
     		['name' =>'ver-secretarias','display_name'=>'Ver Secretarias','group_id' => 11],
     		['name' =>'remover-secretarias','display_name'=>'Remover Secretarias','group_id' => 11],
     		['name' =>'criar-tipo-cargos','display_name'=>'Criar Tipo cargos','group_id' => 12],

@@ -58,7 +58,7 @@ class Secretarias extends Model implements AuditableContract
         $this->attributes['descricao'] = mb_strtoupper($value, "UTF-8");
     }
 
-    public function getDescricaoAttribute($value)
+    public function getTagAttribute($value)
     {
         $data = explode(' - ',$value,2);
         unset($data[0]);

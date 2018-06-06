@@ -1,5 +1,5 @@
-let tblCargos = $('#tblCargos');
-tblCargos.DataTable({
+let tblGrauInstrucao = $('#tblGrauInstrucao');
+tblGrauInstrucao.DataTable({
     serverSide: true,
     processing: true,
     columnDefs: [
@@ -8,7 +8,7 @@ tblCargos.DataTable({
             className: "text-center",
         }
     ],
-    ajax: '/api/comissionado/cargos/',
+    ajax: '/api/comissionado/instrucao/',
     columns: [
         {data: 'id', name: 'id', width:'50px'},
         {data: 'descricao', name: 'descricao'},

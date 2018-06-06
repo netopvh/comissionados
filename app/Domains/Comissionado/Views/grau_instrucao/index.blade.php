@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('page-header')
-    <div class="page-header page-header-default page-header-sm" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;">
+    <div class="page-header page-header-default page-header-sm"
+         style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;">
         <div class="page-header-content">
             <div class="page-title">
                 <h5><span class="text-semibold">Grau de Instrução</span></h5>
@@ -24,73 +25,21 @@
                     </div>
                     <br>
                     @permission('criar-grau-instrucao')
-                    <a href="{{ route('comissionados.instrucao.create') }}" class="btn btn-primary btn-raised legitRipple"><i
+                    <a href="{{ route('comissionados.instrucao.create') }}"
+                       class="btn btn-primary btn-raised legitRipple"><i
                                 class="icon-database-add"></i>
                         Cadastrar</a>
                     @endpermission
                 </div>
-                <table class="table table-framed table-bordered table-striped text-size-base" data-form="deleteForm">
-                        <thead>
-                        <tr>
-                            <th width="70">#</th>
-                            <th>Descrição</th>
-                            <th width="104" class="text-center">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(count($grauInstrucao))
-                            @foreach($grauInstrucao as $instrucao)
-                                <tr>
-                                    <td>{{ $instrucao->id }}</td>
-                                    <td>{{ $instrucao->descricao }}</td>
-                                    <td>
-                                        <ul class="icons-list">
-                                            @permission('ver-grau-instrucao')
-                                            <li>
-                                                <a href="{{ route('comissionados.instrucao.show',['id' => $instrucao->id]) }}"
-                                               data-popup="tooltip" title="Visualizar" data-placement="bottom"><i
-                                                        class="icon-eye"></i>
-                                                </a>
-                                            </li>
-                                            @endpermission
-                                            @permission('atualizar-grau-instrucao')
-                                            <li>
-                                                <a href="{{ route('comissionados.instrucao.edit',['id' => $instrucao->id]) }}"
-                                               data-popup="tooltip" title="Editar" data-placement="bottom"><i
-                                                        class="icon-pencil7"></i>
-                                                </a>
-                                            </li>
-                                            @endpermission
-                                            @permission('remover-grau-instrucao')
-                                            <li>
-                                                <form class="form-delete"
-                                                      action="{{ route('comissionados.instrucao.destroy',['id'=>$instrucao->id]) }}"
-                                                      method="POST">
-                                                    <input type="hidden" name="id" value="">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-                                                    <button name="delete-modal" class="delete"
-                                                            style="padding: 0 0 0 0;border: 0; background: transparent;"><i
-                                                                class="icon-trash" style="padding-top: 2px;"></i></button>
-                                                </form>
-                                            </li>
-                                            @endpermission
-                                        </ul>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="3" class="text-center text-bold">Sem registros a serem exibidos</td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
-                    <div class="panel-body">
-                        <div class="pull-right">
-                            {{ $grauInstrucao->links() }}
-                        </div>
-                    </div>
+                <table id="tblGrauInstrucao" class="table table-framed table-bordered table-striped text-size-base">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@
                     </div>
                     <br>
                     @permission('criar-linha-onibus')
-                    <a href="" class="btn btn-primary btn-raised legitRipple"><i
+                    <a href="#" class="btn btn-primary btn-raised legitRipple"><i
                                 class="icon-database-add"></i>
                         Cadastrar</a>
                     @endpermission

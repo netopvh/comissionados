@@ -25,11 +25,9 @@ class SecretariasController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function index(Request $request)
+    public function index()
     {
-        $this->secretariasRepository->pushCriteria(new RequestCriteria($request));
-        return view('secretarias.index')
-            ->with('secretarias', $this->secretariasRepository->paginate(5));
+        return view('secretarias.index');
     }
 
     /**

@@ -35,9 +35,9 @@
                        data-form="deleteForm">
                     <thead>
                     <tr>
-                        <th width="70">#</th>
+                        <th>#</th>
                         <th>Descrição</th>
-                        <th width="104" class="text-center">Ações</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                 </table>

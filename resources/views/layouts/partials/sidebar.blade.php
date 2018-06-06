@@ -39,7 +39,7 @@
                             </li>
                             @endpermission
                             @permission('ver-regime-trabalho')
-                            <li class="{{ active(['dashboard.regime.index','dashboard.regime.*']) }}">
+                            <li class="{{ active(['comissionados.regime.index','comissionados.regime.*']) }}">
                                 <a href="{{ route('comissionados.regime.index') }}">
                                     <i class="icon-grid-alt"></i>
                                     <span class="text-bold">Regime de Trabalho</span>

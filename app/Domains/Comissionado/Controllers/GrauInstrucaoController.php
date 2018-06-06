@@ -2,6 +2,7 @@
 
 namespace App\Domains\Comissionado\Controllers;
 
+use App\Core\Exceptions\GeneralException;
 use App\Domains\Comissionado\Repositories\Contracts\GrauInstrucaoRepository;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ class GrauInstrucaoController extends Controller
     /** @var  GrauInstrucaoRepository */
     private $grauInstrucaoRepository;
 
+    /**
+     * GrauInstrucaoController constructor.
+     * @param GrauInstrucaoRepository $grauInstrucaoRepo
+     */
     public function __construct(GrauInstrucaoRepository $grauInstrucaoRepo)
     {
         $this->grauInstrucaoRepository = $grauInstrucaoRepo;
@@ -26,8 +31,7 @@ class GrauInstrucaoController extends Controller
      */
     public function index()
     {
-        return view('grau_instrucao.index')
-            ->with('grauInstrucao',$this->grauInstrucaoRepository->paginate(8));
+        return view('grau_instrucao.index');
     }
 
     /**
@@ -51,9 +55,13 @@ class GrauInstrucaoController extends Controller
     {
        try{
             $this->grauInstrucaoRepository->create($request->all());
-            return redirect()->route('comissionados.instrucao.index')->with('success','Registro inserido com sucesso!');
+            return redirect()
+                ->route('comissionados.instrucao.index')
+                ->withSuccess(config('messages.create'));
         }catch (ValidatorException $e){
-            return redirect()->back()->with('errors',$e->getMessageBag());
+            return redirect()
+                ->back()
+                ->with('errors',$e->getMessageBag());
         }
     }
 
@@ -67,9 +75,13 @@ class GrauInstrucaoController extends Controller
     public function show($id)
     {
         try {
-            return view('grau_instrucao.show')->with('grauInstrucao', $this->grauInstrucaoRepository->find($id));
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.instrucao.index')->with('errors','Nenhum registro localizado no banco de dados');
+            $instrucao = $this->grauInstrucaoRepository->findExists('id',$id);
+            return view('grau_instrucao.show')
+                ->withGrauInstrucao($instrucao);
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.instrucao.index')
+                ->withErrors($e->getMessage());
         }
     }
 
@@ -83,9 +95,13 @@ class GrauInstrucaoController extends Controller
     public function edit($id)
     {
         try {
-            return view('grau_instrucao.edit')->with('grauInstrucao', $this->grauInstrucaoRepository->find($id));
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.instrucao.index')->with('errors','Nenhum registro localizado no banco de dados');
+            $instrucao = $this->grauInstrucaoRepository->findExists('id',$id);
+            return view('grau_instrucao.edit')
+                ->withGrauInstrucao($instrucao);
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.instrucao.index')
+                ->withErrors($e->getMessage());
         }
     }
 
@@ -100,13 +116,19 @@ class GrauInstrucaoController extends Controller
     public function update($id, Request $request)
     {
         try {
-            $this->grauInstrucaoRepository->find($id);
-
+            $this->grauInstrucaoRepository->findExists('id',$id);
             $this->grauInstrucaoRepository->update($request->all(), $id);
-
-            return redirect()->route('comissionados.instrucao.index')->with('success','Registro atualizado com sucesso');
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.instrucao.index')->with('errors','Nenhum registro localizado no banco de dados');
+            return redirect()
+                ->route('comissionados.instrucao.index')
+                ->withSuccess(config('messages.create'));
+        } catch (ValidatorException $e){
+            return redirect()
+                ->back()
+                ->withErrors($e->getMessageBag());
+        }catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.instrucao.index')
+                ->withErrors($e->getMessage());
         }
     }
 

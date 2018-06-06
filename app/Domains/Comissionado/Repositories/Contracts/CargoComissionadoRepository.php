@@ -2,13 +2,13 @@
 
 namespace App\Domains\Comissionado\Repositories\Contracts;
 
-use Prettus\Repository\Contracts\RepositoryInterface;
+use App\Core\Repositories\BaseRepositoryContract;
 
 /**
  * Interface AuditRepository
  * @package namespace App\Domains\Access\Repositories\Contracts;
  */
-interface CargoComissionadoRepository extends RepositoryInterface
+interface CargoComissionadoRepository extends BaseRepositoryContract
 {
     //
 }

@@ -10,7 +10,7 @@ class CargoComissionadoValidator extends LaravelValidator
 
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'descricao' => 'required|unique:cargocomissionado'
+            'descricao' => 'required|unique:cargocomissionado,descricao'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'descricao' => 'required'
@@ -18,7 +18,11 @@ class CargoComissionadoValidator extends LaravelValidator
    ];
 
     protected $messages = [
-        'descricao.required' => 'Este campo é requerido.',
-        'descricao.unique' => 'Registro já consta em nosso banco de dados.',
+        'required' => 'O campo :attribute é requerido.',
+        'unique' => 'Registro já consta em nosso banco de dados.',
+    ];
+
+    protected $attributes = [
+        'descricao' => 'descrição'
     ];
 }

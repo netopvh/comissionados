@@ -62,6 +62,10 @@ gulp.task('js', function () {
         PATH_JS + 'actions/access/permissions.js',
         PATH_JS + 'actions/access/audit.js',
         PATH_JS + 'actions/comissionado/cargos.js',
+        PATH_JS + 'actions/comissionado/instrucao.js',
+        PATH_JS + 'actions/comissionado/regime.js',
+        PATH_JS + 'actions/comissionado/secretarias.js',
+        PATH_JS + 'actions/comissionado/tipos.js',
         PATH_JS + 'actions/comissionado/servidores.js',
         PATH_JS + 'actions/comissionado/validacao.js'
     ])

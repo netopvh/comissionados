@@ -2,6 +2,7 @@
 
 namespace App\Domains\Comissionado\Controllers;
 
+use App\Core\Exceptions\GeneralException;
 Use App\Domains\Comissionado\Repositories\Contracts\CargoComissionadoRepository;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,6 +13,10 @@ class CargoComissionadoController extends Controller
     /** @var  CargoComissionadoRepository */
     private $cargoComissionadoRepository;
 
+    /**
+     * CargoComissionadoController constructor.
+     * @param CargoComissionadoRepository $cargoComissionadoRepo
+     */
     public function __construct(CargoComissionadoRepository $cargoComissionadoRepo)
     {
         $this->cargoComissionadoRepository = $cargoComissionadoRepo;
@@ -48,9 +53,13 @@ class CargoComissionadoController extends Controller
     {
         try{
             $this->cargoComissionadoRepository->create($request->all());
-            return redirect()->route('comissionados.comissionados.index')->with('success','Registro inserido com sucesso!');
+            return redirect()
+                ->route('comissionados.cargos.index')
+                ->withSuccess(config('messages.create'));
         }catch (ValidatorException $e){
-            return redirect()->back()->with('errors',$e->getMessageBag());
+            return redirect()
+                ->back()
+                ->withErrors($e->getMessageBag());
         }
     }
 
@@ -64,9 +73,13 @@ class CargoComissionadoController extends Controller
     public function show($id)
     {
         try {
-            return view('cargo_comissionados.show')->with('cargoComissionado', $this->cargoComissionadoRepository->find($id));
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.comissionados.index')->with('errors','Nenhum registro localizado no banco de dados');
+            $cargo = $this->cargoComissionadoRepository->findExists('id',$id);
+            return view('cargo_comissionados.show')
+                ->withCargoComissionado($cargo);
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.cargos.index')
+                ->withErrors($e->getMessage());
         }
     }
 
@@ -80,9 +93,13 @@ class CargoComissionadoController extends Controller
     public function edit($id)
     {
         try {
-            return view('cargo_comissionados.edit')->with('cargoComissionado', $this->cargoComissionadoRepository->find($id));
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.comissionados.index')->with('errors','Nenhum registro localizado no banco de dados');
+            $cargo = $this->cargoComissionadoRepository->findExists('id',$id);
+            return view('cargo_comissionados.edit')
+                ->withCargoComissionado($cargo);
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.cargos.index')
+                ->withErrors($e->getMessage());
         }
     }
 
@@ -97,13 +114,18 @@ class CargoComissionadoController extends Controller
     public function update($id, Request $request)
     {
         try {
-            $this->cargoComissionadoRepository->find($id);
-
+            $this->cargoComissionadoRepository->findExists('id',$id);
             $this->cargoComissionadoRepository->update($request->all(), $id);
-
-            return redirect()->route('comissionados.comissionados.index')->with('success','Registro atualizado com sucesso');
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.comissionados.index')->with('errors','Nenhum registro localizado no banco de dados');
+            return redirect()->route('comissionados.cargos.index')
+                ->withSuccess(config('messages.create'));
+        }catch (ValidatorException $e){
+            return redirect()
+                ->back()
+                ->withErrors($e->getMessageBag());
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.cargos.index')
+                ->withErrors($e->getMessage());
         }
     }
 
@@ -117,13 +139,15 @@ class CargoComissionadoController extends Controller
     public function destroy($id)
     {
         try {
-            $this->cargoComissionadoRepository->find($id);
-
+            $this->cargoComissionadoRepository->findExists('id',$id);
             $this->cargoComissionadoRepository->delete($id);
-
-            return redirect()->back()->with('success','Registro removido com sucesso');
-        } catch (\Exception $e) {
-            return redirect()->route('comissionados.comissionados.index')->with('errors','Nenhum registro localizado no banco de dados');
+            return redirect()
+                ->back()
+                ->withSuccess(config('messages.delete'));
+        } catch (GeneralException $e) {
+            return redirect()
+                ->route('comissionados.cargos.index')
+                ->withErrors($e->getMessage());
         }
     }
 }

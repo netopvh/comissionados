@@ -25,8 +25,7 @@ class RegimeTrabController extends Controller
      */
     public function index()
     {
-        return view('regime_trabalho.index')
-            ->with('regimeTrab',$this->regimeTrabRepository->paginate(10));
+        return view('regime_trabalho.index');
     }
 
     /**

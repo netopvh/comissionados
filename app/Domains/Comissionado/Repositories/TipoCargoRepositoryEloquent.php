@@ -5,7 +5,7 @@ namespace App\Domains\Comissionado\Repositories;
 use App\Domains\Comissionado\Models\TipoCargo;
 use App\Domains\Comissionado\Repositories\Contracts\TipoCargoRepository;
 use App\Domains\Comissionado\Validators\TipoCargoValidator;
-use Prettus\Repository\Eloquent\BaseRepository;
+use App\Core\Repositories\BaseRepository;
 
 class TipoCargoRepositoryEloquent extends BaseRepository implements TipoCargoRepository
 {

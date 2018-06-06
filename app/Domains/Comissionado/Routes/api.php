@@ -14,6 +14,18 @@ Route::prefix('comissionado')->group(function (){
     Route::prefix('cargos')->group(function (){
         Route::get('/','Api\CargoComissionadoApiController@index');
     });
+    Route::prefix('instrucao')->group(function (){
+        Route::get('/','Api\GrauInstrucaoApiController@index');
+    });
+    Route::prefix('regime')->group(function (){
+        Route::get('/','Api\RegimeTrabApiController@index');
+    });
+    Route::prefix('secretarias')->group(function (){
+        Route::get('/','Api\SecretariasApiController@index');
+    });
+    Route::prefix('tipos')->group(function (){
+        Route::get('/','Api\TipoCargoApiController@index');
+    });
     Route::prefix('servidores')->group(function (){
         Route::get('/','Api\ServidorApiController@index');
     });
